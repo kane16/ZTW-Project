@@ -50,7 +50,7 @@ body {
     background-image: none;
 }
 #first-slider .carousel .item {
-    min-height: 600px;
+    min-height: 530pt;
     height: 100%;
     width:100%;
 }
@@ -92,7 +92,7 @@ body {
 }
 
 #first-slider .p {
-    padding-top: 125px;
+    padding-top: 0px;
     text-align: center;
 }
 
