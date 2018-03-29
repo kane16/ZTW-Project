@@ -1,6 +1,6 @@
 package com.ztw.pcadvisor.model;
 
-public enum TypeOfUser {
+public enum UserRole {
     Admin,
     Casual,
     Player,

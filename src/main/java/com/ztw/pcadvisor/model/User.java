@@ -12,16 +12,19 @@ public class User {
     private String firstName;
     @Column(nullable = false)
     private String lastName;
+    @Column(nullable = false)
     private String userName;
+    @Column(nullable = false)
     private String password;
-    private TypeOfUser typeOfUser;
+    @Column(nullable = false)
+    private UserRole userRole;
 
-    public User(String firstName, String lastName, String userName, String password, TypeOfUser typeOfUser) {
+    public User(String firstName, String lastName, String userName, String password, UserRole userRole) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.userName = userName;
         this.password = password;
-        this.typeOfUser = typeOfUser;
+        this.userRole = userRole;
     }
 
     public int getUserID() {
@@ -64,11 +67,11 @@ public class User {
         this.password = password;
     }
 
-    public TypeOfUser getTypeOfUser() {
-        return typeOfUser;
+    public UserRole getUserRole() {
+        return userRole;
     }
 
-    public void setTypeOfUser(TypeOfUser typeOfUser) {
-        this.typeOfUser = typeOfUser;
+    public void setUserRole(UserRole userRole) {
+        this.userRole = userRole;
     }
 }
