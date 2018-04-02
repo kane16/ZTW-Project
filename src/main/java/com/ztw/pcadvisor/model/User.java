@@ -1,40 +1,49 @@
 package com.ztw.pcadvisor.model;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 public class User {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int userID;
-    @Column(nullable = false)
+    private long userID;
     private String firstName;
-    @Column(nullable = false)
     private String lastName;
-    @Column(nullable = false)
     private String userName;
-    @Column(nullable = false)
     private String password;
-    @Column(nullable = false)
-    private UserRole userRole;
+    private Set<UserRole> roles;
+    private int active;
 
-    public User(String firstName, String lastName, String userName, String password, UserRole userRole) {
+    public User(long userID, String firstName, String lastName, String userName, String password, Set<UserRole> roles, int active) {
+        this.userID = userID;
         this.firstName = firstName;
         this.lastName = lastName;
         this.userName = userName;
         this.password = password;
-        this.userRole = userRole;
+        this.roles = roles;
+        this.active = active;
     }
 
-    public int getUserID() {
+    public int getActive() {
+        return active;
+    }
+
+    @Column(nullable = false)
+    public void setActive(int active) {
+        this.active = active;
+    }
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    public long getUserID() {
         return userID;
     }
 
-    public void setUserID(int userID) {
+    public void setUserID(long userID) {
         this.userID = userID;
     }
 
+    @Column(nullable = false)
     public String getFirstName() {
         return firstName;
     }
@@ -43,6 +52,7 @@ public class User {
         this.firstName = firstName;
     }
 
+    @Column(nullable = false)
     public String getLastName() {
         return lastName;
     }
@@ -51,6 +61,7 @@ public class User {
         this.lastName = lastName;
     }
 
+    @Column(nullable = false)
     public String getUserName() {
         return userName;
     }
@@ -59,6 +70,7 @@ public class User {
         this.userName = userName;
     }
 
+    @Column(nullable = false)
     public String getPassword() {
         return password;
     }
@@ -67,11 +79,15 @@ public class User {
         this.password = password;
     }
 
-    public UserRole getUserRole() {
-        return userRole;
+    @ManyToMany
+    @JoinTable(name = "user_with_role", joinColumns = @JoinColumn(name = "userID"), inverseJoinColumns = @JoinColumn(name = "roleID"))
+    public Set<UserRole> getRoles() {
+        return roles;
     }
 
-    public void setUserRole(UserRole userRole) {
-        this.userRole = userRole;
+    public void setRoles(Set<UserRole> roles) {
+        this.roles = roles;
     }
+
+
 }
