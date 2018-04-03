@@ -8,10 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import javax.management.relation.Role;
-import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class UserService {
@@ -38,14 +36,24 @@ public class UserService {
         return userRepository.findAll();
     }
 
-    public void saveUser(User user){
+    public boolean passwordConfirmed(String password, String confirmPassword){
+        return password.equals(confirmPassword);
+    }
 
-        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+    public boolean isPasswordSecure(String password){
+        if(password.length()<3 || password.length()>30)
+            return false;
+        return true;
+    }
 
-        user.setActive(1);
-        UserRole role = roleRepository.findByName("ADMIN");
-        user.setRoles(new HashSet<UserRole>(Arrays.asList(role)));
-        userRepository.save(user);
+    public void createUser(User user, Set<UserRole> userRoles){
+        User newUser = userRepository.findByUserName(user.getUserName());
+
+        if(newUser != null){
+
+        }
+
+
     }
 
 

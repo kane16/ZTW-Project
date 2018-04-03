@@ -12,6 +12,15 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
+    private String[] PUBLIC_MATCHERS={
+            "/resources/**",
+            "/static/**",
+            "/css/**",
+            "/scripts/**",
+            "/images/**",
+            "/templates/**"
+    };
+
     @Autowired
     private BCryptPasswordEncoder encoder;
 
@@ -28,12 +37,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public void configure(WebSecurity webSecurity){
         webSecurity
                 .ignoring()
-                .antMatchers("/resources/**",
-                        "/static/**",
-                        "/css/**",
-                        "/scripts/**",
-                        "/images/**",
-                        "/templates/**");
+                .antMatchers(PUBLIC_MATCHERS);
     }
 
 
