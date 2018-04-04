@@ -51,10 +51,17 @@ public class UserService {
 
         if(newUser != null){
 
+        }else {
+            for(UserRole ur: userRoles){
+                roleRepository.save(ur);
+            }
+            user.getRoles().addAll(userRoles);
+            userRepository.save(user);
         }
 
 
     }
+
 
 
 }
