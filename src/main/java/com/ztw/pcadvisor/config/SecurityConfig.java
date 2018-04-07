@@ -17,8 +17,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 
+
+
     private String[] PUBLIC_MATCHERS={
-            "/resources/**",
+            "/css/**",
+            "/scripts/**",
+            "/images/**",
             "/",
             "/login",
             "/register"
@@ -36,7 +40,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
                 .antMatchers(PUBLIC_MATCHERS).permitAll()
-                .anyRequest().denyAll();
+                .antMatchers("/admin/**").hasRole("ADMIN");
     }
 
 

@@ -1,24 +1,18 @@
 package com.ztw.pcadvisor.service;
 
 import com.ztw.pcadvisor.model.User;
-import com.ztw.pcadvisor.model.UserRole;
-import com.ztw.pcadvisor.repository.RoleRepository;
 import com.ztw.pcadvisor.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Set;
 
 @Service
 public class UserService {
 
     @Autowired
     private UserRepository userRepository;
-
-    @Autowired
-    private RoleRepository roleRepository;
 
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -46,20 +40,22 @@ public class UserService {
         return true;
     }
 
-    public void createUser(User user, Set<UserRole> userRoles){
+    public boolean createUser(User user){
+
         User newUser = userRepository.findByUserName(user.getUserName());
 
-        if(newUser != null){
-
-        }else {
-            for(UserRole ur: userRoles){
-                roleRepository.save(ur);
-            }
-            user.getRoles().addAll(userRoles);
+        if(newUser == null){
+            user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
             userRepository.save(user);
+            return true;
         }
 
+        return false;
 
+    }
+
+    public User findByConfirmationToken(String confirmationToken){
+        return userRepository.findByConfirmationToken(confirmationToken);
     }
 
 

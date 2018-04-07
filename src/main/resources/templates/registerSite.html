@@ -56,25 +56,26 @@
                     </div>
                 </div>
                 <div class="panel-body">
-                    <form accept-charset="UTF-8" role="form" class="form-signin" action="/login">
+                    <form accept-charset="UTF-8" role="form" class="form-signin" th:action="@{/register}"
+                    th:object="${user}" method="post">
                         <fieldset>
                         <label class="panel-login">
                             <div class="login_result"></div>
                         </label>
-                        <input class="form-control" placeholder="Imię" id="name" type="text">
+                        <input class="form-control" placeholder="Imię" th:field="*{firstName}" type="text">
                         </br>
-                        <input class="form-control" placeholder="Nazwisko" id="lastname" type="text">
+                        <input class="form-control" placeholder="Nazwisko" th:field="*{lastName}" type="text">
                         </br>
-                            <input class="form-control" placeholder="Nazwa użytkownika" id="username" type="text">
+                            <input class="form-control" placeholder="Nazwa użytkownika" th:field="*{userName}" type="text">
                             </br>
-                            <input class="form-control" placeholder="Hasło" id="password" type="password">
+                            <input class="form-control" placeholder="Hasło" th:field="*{password}" type="password">
                             </br>
-                            <input class="form-control" placeholder="Ponów Hasło" id="repeatPassword" type="password">
+                            <input class="form-control" placeholder="Ponów Hasło" th:object="${repeatPassword}" type="password">
                             </br>
-                            <select class="form-control" id="usertype">
-                                <option>Zwykły użytkownik</option>
-                                <option>Gracz</option>
-                                <option>Użytkownik profesjonalny</option>
+                            <select class="form-control" th:field="*{userType}">
+                                <option th:each="type: ${T(com.ztw.pcadvisor.model.UserType).values()}"
+                                        th:value="${type}"
+                                        th:text="${type}"></option>
                             </select>
                             </br>
                         <input class="btn btn-lg btn-success btn-block" type="submit" id="login" value="Zarejestruj »">

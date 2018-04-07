@@ -1,40 +1,49 @@
 package com.ztw.pcadvisor.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Set;
 
 @Entity
 public class User {
 
-    private long userID;
-    private String firstName;
-    private String lastName;
-    private String userName;
-    private String password;
-    private Set<UserRole> roles;
-    private int active;
-
-    public User(long userID, String firstName, String lastName, String userName, String password, Set<UserRole> roles, int active) {
-        this.userID = userID;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.userName = userName;
-        this.password = password;
-        this.roles = roles;
-        this.active = active;
-    }
-
-    public int getActive() {
-        return active;
-    }
-
-    @Column(nullable = false)
-    public void setActive(int active) {
-        this.active = active;
-    }
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    private long userID;
+
+    @Column
+    private String firstName;
+
+    @Column
+    private String lastName;
+
+    @Column
+    @NotNull
+    private String userName;
+
+    @Column
+    @NotNull
+    private String password;
+
+    @Column
+    @NotNull
+    private UserType userType;
+
+    @Column
+    @NotNull
+    private boolean active;
+
+    @Column
+    private String confirmationToken;
+
+    public String getConfirmationToken() {
+        return confirmationToken;
+    }
+
+    public void setConfirmationToken(String confirmationToken) {
+        this.confirmationToken = confirmationToken;
+    }
+
     public long getUserID() {
         return userID;
     }
@@ -43,7 +52,6 @@ public class User {
         this.userID = userID;
     }
 
-    @Column(nullable = false)
     public String getFirstName() {
         return firstName;
     }
@@ -52,7 +60,6 @@ public class User {
         this.firstName = firstName;
     }
 
-    @Column(nullable = false)
     public String getLastName() {
         return lastName;
     }
@@ -61,7 +68,6 @@ public class User {
         this.lastName = lastName;
     }
 
-    @Column(nullable = false)
     public String getUserName() {
         return userName;
     }
@@ -70,7 +76,6 @@ public class User {
         this.userName = userName;
     }
 
-    @Column(nullable = false)
     public String getPassword() {
         return password;
     }
@@ -79,15 +84,19 @@ public class User {
         this.password = password;
     }
 
-    @ManyToMany
-    @JoinTable(name = "user_with_role", joinColumns = @JoinColumn(name = "userID"), inverseJoinColumns = @JoinColumn(name = "roleID"))
-    public Set<UserRole> getRoles() {
-        return roles;
+    public UserType getUserType() {
+        return userType;
     }
 
-    public void setRoles(Set<UserRole> roles) {
-        this.roles = roles;
+    public void setUserType(UserType userType) {
+        this.userType = userType;
     }
 
+    public boolean isActive() {
+        return active;
+    }
 
+    public void setActive(boolean active) {
+        this.active = active;
+    }
 }
