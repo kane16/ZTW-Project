@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8"/>
-    <title>Strona startowa</title>
+    <meta charset="UTF-8">
+    <title>Confirmation</title>
     <script th:src="@{//code.jquery.com/jquery-3.3.0.min.js}"></script>
     <link th:href="@{//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css}" rel="stylesheet" id="bootstrap-css">
     <script th:src="@{//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js}"></script>
@@ -48,46 +48,14 @@
         </div><!-- /.nav-collapse -->
     </nav>
 
-
-</div>
-
-<div id="first-slider">
-    <div id="carousel-example-generic" class="carousel slide carousel-fade">
-        <!-- Indicators -->
-        <ol class="carousel-indicators">
-            <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-            <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-        </ol>
-        <!-- Wrapper for slides -->
-        <div class="carousel-inner" userRole="listbox">
-            <!-- Item 1 -->
-            <div class="item active slide1" th:style="'background-image:url(' + @{/images/GTX-TITAN-Z.jpg} + ');'">
-
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <div class="row-fluid user-row">
+                <h1 style="text-align: center">Poprawnie założono konto</h1>
             </div>
-            <!-- Item 2 -->
-            <div class="item slide2" th:style="'background-image:url(' + @{/images/AMD-Radeon-RX-Vega.jpg} + ');'">
-
-            </div>
-
         </div>
     </div>
 </div>
-
-<div class="swiper-container main-slider" id="myCarousel">
-    <div class="swiper-wrapper">
-        <div class="swiper-slide slider-bg-position" th:style="'background-image:url(' + @{/images/GTX-TITAN-Z.jpg} + ');'" data-hash="slide1">
-        </div>
-        <div class="swiper-slide slider-bg-position" th:style="'background-image:url(' + @{/images/AMD-Radeon-RX-Vega.jpg} + ');'" data-hash="slide2">
-        </div>
-    </div>
-    <!-- Add Pagination -->
-    <div class="swiper-pagination"></div>
-    <!-- Add Navigation -->
-    <div class="swiper-button-prev"><i class="fa fa-chevron-left"></i></div>
-    <div class="swiper-button-next"><i class="fa fa-chevron-right"></i></div>
-</div>
-
-
 
 </body>
 </html>

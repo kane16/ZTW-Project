@@ -11,12 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.jws.WebParam;
 import javax.validation.Valid;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
 @Controller
 public class RegisterController {
@@ -25,22 +20,51 @@ public class RegisterController {
     UserService userService;
 
     @GetMapping("/register")
-    public ModelAndView register(ModelAndView modelAndView, User user, String repeatPassword) {
-        modelAndView.addObject("user", user);
-        modelAndView.addObject("repeatPassword",repeatPassword);
-        modelAndView.setViewName("registerSite");
-        return modelAndView;
+    public String register() {
+        return "registerSite";
     }
 
 
     @PostMapping("/register")
-    public ModelAndView registerSubmit(ModelAndView modelAndView, @Valid User user, @ModelAttribute UserType userType){
+    public String registerSubmit(
+            @ModelAttribute("firstName") String firstName,
+            @ModelAttribute("lastName") String lastName,
+            @ModelAttribute("userName") String userName,
+            @ModelAttribute("password") String password,
+            @ModelAttribute("repeatPassword") String repeatPassword,
+            @ModelAttribute("userType") String userType,
+            Model model
+    ){
 
-        userService.createUser(user);
+        User user = new User();
+        user.setFirstName(firstName);
+        user.setLastName(lastName);
+        user.setUserName(userName);
+        user.setPassword(password);
+        user.setUserType(UserType.valueOf(userType));
 
-        modelAndView.setViewName("registerSite");
+        boolean correct = true;
 
-        return modelAndView;
+        if(userService.findByUserName(user.getUserName())!=null){
+            correct=false;
+            model.addAttribute("userExists", true);
+        }
+
+        if(!userService.isPasswordSecure(user.getPassword()) && correct){
+            correct=false;
+            model.addAttribute("unsecurePassword", true);
+        }
+
+        if(!userService.isPasswordCorrectlyConfirmed(user.getPassword(), repeatPassword) && correct){
+            correct=false;
+            model.addAttribute("wrongPasswordConfirmed", true);
+        }
+
+        if(correct) {
+            userService.createUser(user);
+            return "confirm";
+        }
+        return "registerSite";
     }
 
 }

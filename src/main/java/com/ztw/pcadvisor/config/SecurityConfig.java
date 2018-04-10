@@ -24,8 +24,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             "/scripts/**",
             "/images/**",
             "/",
-            "/login",
-            "/register"
+            "/login/**",
+            "/register/**",
+            "/search"
 
     };
 
@@ -36,11 +37,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception{
         httpSecurity
+                .formLogin()
+                .loginPage("/login")
+                .and()
+                .logout()
+                .logoutSuccessUrl("/")
+                .and()
                 .csrf()
                 .and()
                 .authorizeRequests()
                 .antMatchers(PUBLIC_MATCHERS).permitAll()
-                .antMatchers("/admin/**").hasRole("ADMIN");
+                .anyRequest().hasRole("ADMIN");
     }
 
 

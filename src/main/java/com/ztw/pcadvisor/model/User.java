@@ -2,14 +2,13 @@ package com.ztw.pcadvisor.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.Set;
 
 @Entity
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long userID;
+    private long userId;
 
     @Column
     private String firstName;
@@ -36,20 +35,16 @@ public class User {
     @Column
     private String confirmationToken;
 
-    public String getConfirmationToken() {
-        return confirmationToken;
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "roleId")
+    private UserRole userRole;
+
+    public long getUserId() {
+        return userId;
     }
 
-    public void setConfirmationToken(String confirmationToken) {
-        this.confirmationToken = confirmationToken;
-    }
-
-    public long getUserID() {
-        return userID;
-    }
-
-    public void setUserID(long userID) {
-        this.userID = userID;
+    public void setUserId(long userId) {
+        this.userId = userId;
     }
 
     public String getFirstName() {
@@ -98,5 +93,21 @@ public class User {
 
     public void setActive(boolean active) {
         this.active = active;
+    }
+
+    public String getConfirmationToken() {
+        return confirmationToken;
+    }
+
+    public void setConfirmationToken(String confirmationToken) {
+        this.confirmationToken = confirmationToken;
+    }
+
+    public UserRole getUserRole() {
+        return userRole;
+    }
+
+    public void setUserRole(UserRole userRole) {
+        this.userRole = userRole;
     }
 }

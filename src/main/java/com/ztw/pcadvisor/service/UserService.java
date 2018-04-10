@@ -7,6 +7,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Service
 public class UserService {
@@ -30,14 +32,14 @@ public class UserService {
         return userRepository.findAll();
     }
 
-    public boolean passwordConfirmed(String password, String confirmPassword){
+    public boolean isPasswordCorrectlyConfirmed(String password, String confirmPassword){
         return password.equals(confirmPassword);
     }
 
     public boolean isPasswordSecure(String password){
-        if(password.length()<3 || password.length()>30)
-            return false;
-        return true;
+        Pattern p = Pattern.compile("(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&+=])");
+        Matcher m = p.matcher(password);
+        return password.length()>3 && password.length()<30 && m.find();
     }
 
     public boolean createUser(User user){
@@ -53,6 +55,20 @@ public class UserService {
         return false;
 
     }
+
+    public boolean updateUser(User user){
+
+        User updatedUser = userRepository.findByUserName(user.getUserName());
+
+        if(updatedUser != null){
+            user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+            userRepository.save(user);
+            return true;
+        }
+
+        return false;
+    }
+
 
     public User findByConfirmationToken(String confirmationToken){
         return userRepository.findByConfirmationToken(confirmationToken);
