@@ -1,8 +1,10 @@
 package com.ztw.pcadvisor.config;
 
+import com.ztw.pcadvisor.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -13,10 +15,20 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
-    public BCryptPasswordEncoder passwordEncoder(){
+    public BCryptPasswordEncoder getEncoder(){
         return new BCryptPasswordEncoder();
     }
 
+    @Bean
+    public UserService getUserService(){
+        return new UserService();
+    }
+
+    @Autowired
+    private BCryptPasswordEncoder encoder;
+
+    @Autowired
+    private UserService userService;
 
 
     private String[] PUBLIC_MATCHERS={
@@ -26,19 +38,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             "/",
             "/login/**",
             "/register/**",
-            "/search"
 
     };
 
     @Autowired
-    private BCryptPasswordEncoder encoder;
+    public void configAuthentication(AuthenticationManagerBuilder auth) throws Exception{
+        auth.userDetailsService(userService).passwordEncoder(encoder);
+    }
 
 
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception{
         httpSecurity
                 .formLogin()
-                .loginPage("/login")
+                .loginPage("/login").usernameParameter("username").passwordParameter("password")
                 .and()
                 .logout()
                 .logoutSuccessUrl("/")
@@ -47,7 +60,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
                 .antMatchers(PUBLIC_MATCHERS).permitAll()
-                .anyRequest().hasRole("ADMIN");
+                .antMatchers("/search").authenticated()
+                .antMatchers("/admin").hasRole("ADMIN");
     }
 
 

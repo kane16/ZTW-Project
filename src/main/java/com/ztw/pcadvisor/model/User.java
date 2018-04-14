@@ -21,15 +21,12 @@ public class User {
     private String userName;
 
     @Column
-    @NotNull
     private String password;
 
     @Column
-    @NotNull
     private UserType userType;
 
     @Column
-    @NotNull
     private boolean active;
 
     @Column

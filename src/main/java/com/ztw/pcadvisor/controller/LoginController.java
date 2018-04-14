@@ -13,9 +13,7 @@ public class LoginController {
 
     @RequestMapping("/login")
     public String login(){
-
         return "loginSite";
-
     }
 
 }
