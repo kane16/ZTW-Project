@@ -66,8 +66,14 @@
         </div>
     </div>
 
-    <div th:if="${code}">
-        <h1>Mamy to</h1>
+    <div th:if="${tableActive}">
+        <table class="table" align="center" style="background-color: white;border-radius: 10px;">
+            <tr scope="row" th:each="product : ${productList}">
+                <td style="width: 300px; text-align: center;"><img style="width: 198px; height: 160px" th:src="${product.getPictureUrl()}"/></td>
+                <td style="width: 300px; text-align: center;" th:text="${product.getName()}"></td>
+                <td style="width: 300px; text-align: center;" th:text="${product.getPrice()}"></td>
+            </tr>
+        </table>
     </div>
 
 
