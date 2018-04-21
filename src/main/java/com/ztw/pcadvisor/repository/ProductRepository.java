@@ -9,4 +9,5 @@ public interface ProductRepository extends JpaRepository<GraphicCard, Long> {
 
     List<GraphicCard> findByNameContaining(String name);
 
+
 }
