@@ -22,12 +22,4 @@ public class AdminController {
         return "adminSite";
     }
 
-    @RequestMapping("/admin")
-    @ResponseBody
-    public Set getProducers(@RequestParam(required = false) String typeOfComponent){
-
-        Map<String,Set<String>> producers = productService.getGetProducersAndComponents();
-        return producers.get(typeOfComponent);
-    }
-
 }

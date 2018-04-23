@@ -1,14 +1,13 @@
 package com.ztw.pcadvisor.service;
 
+import com.ztw.pcadvisor.model.Component;
+import com.ztw.pcadvisor.model.ComponentType;
 import com.ztw.pcadvisor.model.GraphicCard;
 import com.ztw.pcadvisor.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 @Service
 public class ProductService {
@@ -16,18 +15,19 @@ public class ProductService {
     @Autowired
     ProductRepository productRepository;
 
-    private Set<String> processorProducers = new HashSet<>();
-    private Set<String> graphicCardsProducers = new HashSet<>();
+    private List<Component> producersAndComponents;
 
-    private Map<String, Set<String>> producersAndComponents;
+    public ProductService() {
+        producersAndComponents = new ArrayList<>();
+        producersAndComponents.add(new Component(1,ComponentType.Processor, "AMD"));
+        producersAndComponents.add(new Component(2,ComponentType.Processor, "Intel"));
+        producersAndComponents.add(new Component(3,ComponentType.GraphicCard, "Radeon"));
+        producersAndComponents.add(new Component(4,ComponentType.GraphicCard, "Nvidia"));
+        producersAndComponents.add(new Component(5,ComponentType.GraphicCard, "Gigabyte"));
+        producersAndComponents.add(new Component(6,ComponentType.GraphicCard, "Arez"));
+    }
 
-    public Map<String, Set<String>> getGetProducersAndComponents(){
-        processorProducers.add("AMD");
-        processorProducers.add("Intel");
-        graphicCardsProducers.add("Radeon");
-        graphicCardsProducers.add("Nvidia");
-        producersAndComponents.put("Procesory", processorProducers);
-        producersAndComponents.put("Karta graficzna", graphicCardsProducers);
+    public List<Component> getProducersAndComponents(){
         return producersAndComponents;
     }
 

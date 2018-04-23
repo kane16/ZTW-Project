@@ -18,6 +18,20 @@ public class GraphicCard {
     @Column
     private String pictureUrl;
 
+    @Column
+    private int GDDRsize;
+
+    @Column
+    private int cudaCores;
+
+    @Column
+    private int clockFrequency;
+
+    @Column
+    private double rank;
+
+
+
     public long getGpuID() {
         return gpuID;
     }

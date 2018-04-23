@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Strona administratora</title>
@@ -8,9 +8,11 @@
     <script th:src="@{//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js}"></script>
     <script th:src="@{//code.jquery.com/jquery-1.11.1.min.js}"></script>
     <script th:src="@{/scripts/navbar.js}"></script>
-    <link th:href="@{/css/navbar.css}" rel="stylesheet" id="bootstrap-nav-css">
+    <script th:src="@{/scripts/jquery.chained.js}"></script>
+    <script th:src="@{/scripts/jquery.chained.remote.js}"></script>
+    <link th:href="@{/css/navbar.css}" rel="stylesheet" class="bootstrap-nav-css">
     <link href="../static/css/loginSite.css" th:href="@{/css/loginSite.css}" rel="stylesheet"/>
-    <link th:href="@{/css/adminSiteToolbar.css}" rel="stylesheet" id="bootstrap-nav-css">
+    <link th:href="@{/css/adminSiteToolbar.css}" rel="stylesheet" class="bootstrap-nav-css">
 </head>
 <body>
 
@@ -29,16 +31,19 @@
 
         <div class="collapse navbar-collapse js-navbar-collapse">
             <ul class="nav navbar-nav">
-                <li><a href="/admin">Strona administratora</a></li>
-                <li><a href="/search">Wyszukaj</a></li>
-                <li><a href="#">Zestaw komputerowy</a></li>
+                <ul sec:authorize="isAuthenticated()" class="nav navbar-nav">
+                    <li sec:authorize="hasRole('ROLE_ADMIN')"><a href="/admin">Strona administratora</a></li>
+                    <li><a href="/search">Wyszukaj</a></li>
+                    <li><a href="#">Zestaw komputerowy</a></li>
+                </ul>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" userRole="button" aria-expanded="false">Moje konto<span class="caret"></span></a>
                     <ul class="dropdown-menu" userRole="menu">
-                        <li><a href="/login">Zaloguj się</a></li>
-                        <li><a href="/register">Zarejestruj</a></li>
+                        <li sec:authorize="isAnonymous()"><a href="/login">Zaloguj się</a></li>
+                        <li sec:authorize="isAnonymous()"><a href="/register">Zarejestruj</a></li>
+                        <li sec:authorize="isAuthenticated()"><a href="/logout">Wyloguj</a></li>
                         <li class="divider"></li>
                         <li><a href="#">Kontakt</a></li>
                     </ul>
@@ -117,16 +122,14 @@
                                             </label>
                                             <input class="form-control" placeholder="Oznaczenie części" id="partName" type="text">
                                             </br>
-                                            <select class="form-control"  id="partType">
-                                                <option>Karta graficzna</option>
-                                                <option>Procesor</option>
+                                            <select class="form-control"  id="componentType" name="componentType">
+                                                <option value="">--</option>
+                                                <option value="GraphicCard">Karta graficzna</option>
+                                                <option value="Processor">Procesor</option>
                                             </select>
                                             </br>
-                                            <select class="form-control"  id="partType">
-                                                <option>Gigabyte</option>
-                                                <option>AMD</option>
-                                                <option>ASUS</option>
-                                                <option>Intel</option>
+                                            <select class="form-control"  id="componentName" name="componentName">
+                                                <option value="">--</option>
                                             </select>
                                             </br>
                                             <input class="btn btn-lg btn-success btn-block" type="submit" id="add" value="Dodaj część »">
@@ -145,6 +148,13 @@
 
 
 </div>
+
+<script>
+    $("#componentName").remoteChained({
+        parents : "#componentType",
+        url : "/api/all"
+    });
+</script>
 
 </body>
 </html>
