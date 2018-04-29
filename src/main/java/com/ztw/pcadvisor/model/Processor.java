@@ -1,11 +1,11 @@
 package com.ztw.pcadvisor.model;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.HashSet;
+import java.util.Set;
 
+@Entity
 public class Processor {
 
     @Id
@@ -37,6 +37,17 @@ public class Processor {
     private String producer;
     @Column
     private String pictureURL;
+
+    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "processor")
+    private Set<PCConfiguration> configurations = new HashSet<>();
+
+    public Set<PCConfiguration> getConfigurations() {
+        return configurations;
+    }
+
+    public void setConfigurations(Set<PCConfiguration> configurations) {
+        this.configurations = configurations;
+    }
 
     public long getCpuID() {
         return cpuID;

@@ -2,9 +2,12 @@ package com.ztw.pcadvisor.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
-public class User {
+public class User implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -35,6 +38,17 @@ public class User {
     @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "roleId")
     private UserRole userRole;
+
+    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "user")
+    private Set<PCConfiguration> configurations = new HashSet<>();
+
+    public Set<PCConfiguration> getConfigurations() {
+        return configurations;
+    }
+
+    public void setConfigurations(Set<PCConfiguration> configurations) {
+        this.configurations = configurations;
+    }
 
     public long getUserId() {
         return userId;

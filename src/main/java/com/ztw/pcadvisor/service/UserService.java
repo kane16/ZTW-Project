@@ -1,5 +1,6 @@
 package com.ztw.pcadvisor.service;
 
+import com.ztw.pcadvisor.cache.UsersCache;
 import com.ztw.pcadvisor.model.CustomUserDetails;
 import com.ztw.pcadvisor.model.User;
 import com.ztw.pcadvisor.model.UserRole;
@@ -25,6 +26,9 @@ public class UserService implements UserDetailsService {
 
     @Autowired
     private RoleRepository roleRepository;
+
+    @Autowired
+    private UsersCache userCache;
 
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -94,10 +98,9 @@ public class UserService implements UserDetailsService {
         return userRepository.findByUserName(userName);
     }
 
-
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepository.findByUserName(username);
+        User user = userCache.getUser(username);
         String userRole = user.getUserRole().getName();
         return new CustomUserDetails(user, userRole);
     }
