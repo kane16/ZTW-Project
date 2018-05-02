@@ -48,7 +48,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             "/",
             "/login/**",
             "/register/**"
-
     };
 
     @Autowired
@@ -71,8 +70,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
                 .antMatchers(PUBLIC_MATCHERS).permitAll()
-                .antMatchers("/search", "/api/**").authenticated()
-                .antMatchers("/admin", "/api/**").hasRole("ADMIN");
+                .antMatchers("/search", "/api/**", "/pcconfig").fullyAuthenticated()
+                .antMatchers("/admin/**").hasRole("ADMIN");
     }
 
     @Bean

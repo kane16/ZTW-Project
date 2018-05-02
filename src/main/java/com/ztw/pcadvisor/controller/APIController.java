@@ -1,6 +1,6 @@
 package com.ztw.pcadvisor.controller;
 
-import com.ztw.pcadvisor.model.Component;
+import com.ztw.pcadvisor.model.PCComponent;
 import com.ztw.pcadvisor.model.ComponentType;
 import com.ztw.pcadvisor.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,13 +21,13 @@ public class APIController {
 
     @GetMapping(value = "/all")
     public List<Map<String, String>> findAll(@RequestParam(value = "componentType", required = false) String componentType){
-        List<Component> allItems = productService.getProducersAndComponents();
+        List<PCComponent> allItems = productService.getProducersAndPCComponents();
 
         ArrayList<Map<String, String>> allItemsProducers = new ArrayList<>();
 
-        for (Component component: allItems){
+        for (PCComponent PCComponent : allItems){
             HashMap<String, String> map = new HashMap<>();
-            map.put(component.getComponentType().toString(),component.getProducer());
+            map.put(PCComponent.getComponentType().toString(), PCComponent.getProducer());
             allItemsProducers.add(map);
         }
 
@@ -35,10 +35,10 @@ public class APIController {
             List<Map<String, String>> toShow = new ArrayList<>();
             Iterator it = allItems.iterator();
             while(it.hasNext()){
-                Component component = (Component) it.next();
-                if(component.getComponentType().equals(ComponentType.valueOf(componentType))){
+                PCComponent PCComponent = (PCComponent) it.next();
+                if(PCComponent.getComponentType().equals(ComponentType.valueOf(componentType))){
                     HashMap<String, String> map = new HashMap<>();
-                    map.put(component.getComponentType().toString(),component.getProducer());
+                    map.put(PCComponent.getComponentType().toString(), PCComponent.getProducer());
                     toShow.add(map);
                 }
             }

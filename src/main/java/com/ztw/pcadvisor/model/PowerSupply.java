@@ -12,6 +12,12 @@ public class PowerSupply {
     private int powerSupplyID;
 
     @Column
+    private String name;
+
+    @Column
+    private double price;
+
+    @Column
     private int powerSupplyPower;
 
     @Column
@@ -22,6 +28,22 @@ public class PowerSupply {
 
     @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "pcCase")
     private Set<PCConfiguration> configurations = new HashSet<>();
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
 
     public int getPowerSupplyID() {
         return powerSupplyID;

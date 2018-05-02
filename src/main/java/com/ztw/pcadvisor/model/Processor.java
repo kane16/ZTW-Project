@@ -12,6 +12,8 @@ public class Processor {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long cpuID;
     @Column
+    private String name;
+    @Column
     private int TDP;
     @Column
     @NotNull
@@ -40,6 +42,14 @@ public class Processor {
 
     @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "processor")
     private Set<PCConfiguration> configurations = new HashSet<>();
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public Set<PCConfiguration> getConfigurations() {
         return configurations;

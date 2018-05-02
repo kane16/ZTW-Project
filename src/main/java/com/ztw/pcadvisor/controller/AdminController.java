@@ -1,25 +1,48 @@
 package com.ztw.pcadvisor.controller;
 
-import com.ztw.pcadvisor.service.ProductService;
+import com.ztw.pcadvisor.model.User;
+import com.ztw.pcadvisor.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-
-import java.util.Map;
-import java.util.Set;
 
 @Controller
 public class AdminController {
 
     @Autowired
-    ProductService productService;
+    UserService userService;
+
 
 
     @RequestMapping("/admin")
     public String admin(){
         return "adminSite";
     }
+
+    @PostMapping("/admin/changePassword")
+    public String adminChangePassword(
+            @ModelAttribute("usernameToChange") String username,
+            @ModelAttribute("passwordToChange") String password,
+            @ModelAttribute("repeatPasswordToChange") String passwordConfirmation
+    ){
+        User user = userService.findByUserName(username);
+        if(password.equals(passwordConfirmation) && user != null){
+            user.setPassword(password);
+            userService.updateUser(user);
+        }
+        return "adminSite";
+    }
+
+    @PostMapping("/admin/deleteUser")
+    public String adminDeleteUser(
+            @ModelAttribute("usernameToDelete") String usernameToDelete
+    ){
+        userService.deleteUser(usernameToDelete);
+        return "adminSite";
+    }
+
+
 
 }

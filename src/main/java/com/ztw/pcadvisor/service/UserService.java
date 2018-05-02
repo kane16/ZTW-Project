@@ -2,6 +2,7 @@ package com.ztw.pcadvisor.service;
 
 import com.ztw.pcadvisor.cache.UsersCache;
 import com.ztw.pcadvisor.model.CustomUserDetails;
+import com.ztw.pcadvisor.model.PCConfiguration;
 import com.ztw.pcadvisor.model.User;
 import com.ztw.pcadvisor.model.UserRole;
 import com.ztw.pcadvisor.repository.RoleRepository;
@@ -57,6 +58,7 @@ public class UserService implements UserDetailsService {
 
         if(newUser == null){
             user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+            user.setPcConfiguration(new PCConfiguration());
             UserRole userRole = roleRepository.findByName("ROLE_USER");
             if(roleRepository.findByName("ROLE_USER")!=null){
 
@@ -90,8 +92,11 @@ public class UserService implements UserDetailsService {
     }
 
 
-    public User findByConfirmationToken(String confirmationToken){
-        return userRepository.findByConfirmationToken(confirmationToken);
+    public void deleteUser(String username){
+        User user = userRepository.findByUserName(username);
+        if(user != null && !user.getUserRole().getName().equals("ROLE_ADMIN")){
+            userRepository.delete(user);
+        }
     }
 
     public User findByUserName(String userName){

@@ -3,8 +3,6 @@ package com.ztw.pcadvisor.model;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
 
 @Entity
 public class User implements Serializable {
@@ -39,15 +37,15 @@ public class User implements Serializable {
     @JoinColumn(name = "roleId")
     private UserRole userRole;
 
-    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "user")
-    private Set<PCConfiguration> configurations = new HashSet<>();
+    @OneToOne(cascade = CascadeType.PERSIST, mappedBy = "user")
+    private PCConfiguration pcConfiguration;
 
-    public Set<PCConfiguration> getConfigurations() {
-        return configurations;
+    public PCConfiguration getPcConfiguration() {
+        return pcConfiguration;
     }
 
-    public void setConfigurations(Set<PCConfiguration> configurations) {
-        this.configurations = configurations;
+    public void setPcConfiguration(PCConfiguration pcConfiguration) {
+        this.pcConfiguration = pcConfiguration;
     }
 
     public long getUserId() {

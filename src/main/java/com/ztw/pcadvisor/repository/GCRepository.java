@@ -5,9 +5,12 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface ProductRepository extends JpaRepository<GraphicCard, Long> {
+public interface GCRepository extends JpaRepository<GraphicCard, Long> {
 
     List<GraphicCard> findByNameContaining(String name);
 
+    GraphicCard findByGpuID(long gpuID);
+
+    List<GraphicCard> findAll();
 
 }
