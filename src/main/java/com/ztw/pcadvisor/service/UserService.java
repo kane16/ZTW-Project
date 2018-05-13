@@ -34,6 +34,10 @@ public class UserService implements UserDetailsService {
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
+    public String encryptPassword(String password){
+        return bCryptPasswordEncoder.encode(password);
+    }
+
     public boolean VerifyPasword(User user, String rawPassword){
         return bCryptPasswordEncoder.matches(rawPassword, user.getPassword());
     }

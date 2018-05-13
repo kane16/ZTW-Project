@@ -18,9 +18,6 @@ public class GraphicCard {
     private double price;
 
     @Column
-    private String pictureUrl;
-
-    @Column
     private int GDDRsize;
 
     @Column
@@ -165,11 +162,4 @@ public class GraphicCard {
         this.price = price;
     }
 
-    public String getPictureUrl() {
-        return pictureUrl;
-    }
-
-    public void setPictureUrl(String pictureUrl) {
-        this.pictureUrl = pictureUrl;
-    }
 }

@@ -36,12 +36,15 @@ public class APIController {
             Iterator it = allItems.iterator();
             while(it.hasNext()){
                 PCComponent PCComponent = (PCComponent) it.next();
-                if(PCComponent.getComponentType().equals(ComponentType.valueOf(componentType))){
+                if(!componentType.equals("") && PCComponent.getComponentType().equals(ComponentType.valueOf(componentType))){
                     HashMap<String, String> map = new HashMap<>();
                     map.put(PCComponent.getComponentType().toString(), PCComponent.getProducer());
                     toShow.add(map);
                 }
             }
+            HashMap<String, String> map = new HashMap<>();
+            map.put("--", "--");
+            toShow.add(map);
             return toShow;
         }
 

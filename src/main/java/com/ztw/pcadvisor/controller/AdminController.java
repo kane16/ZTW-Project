@@ -43,6 +43,16 @@ public class AdminController {
         return "adminSite";
     }
 
+    @PostMapping("/admin/addPart")
+    public String adminAddPart(
+            @ModelAttribute("partName") String partName,
+            @ModelAttribute("componentType") String componentType,
+            @ModelAttribute("componentName") String componentName
+    ){
+
+        return "adminSite";
+    }
+
 
 
 }

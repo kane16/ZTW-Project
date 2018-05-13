@@ -20,12 +20,6 @@ import javax.sql.DataSource;
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-
-    @Bean
-    public BCryptPasswordEncoder getEncoder(){
-        return new BCryptPasswordEncoder();
-    }
-
     @Bean
     public UserService getUserService(){
         return new UserService();
@@ -47,7 +41,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             "/images/**",
             "/",
             "/login/**",
-            "/register/**"
+            "/register/**",
+            "/api/currency"
     };
 
     @Autowired

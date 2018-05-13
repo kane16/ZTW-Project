@@ -11,6 +11,16 @@ public class PCComponent {
     private String producer;
     private double price;
     private String name;
+    private String pictureURL;
+
+    public PCComponent(long id, ComponentType componentType, String producer, double price, String name, String pictureURL) {
+        this.id = id;
+        this.componentType = componentType;
+        this.producer = producer;
+        this.price = price;
+        this.name = name;
+        this.pictureURL = pictureURL;
+    }
 
     public PCComponent(long id, ComponentType componentType, String producer) {
         this.id = id;
@@ -60,5 +70,13 @@ public class PCComponent {
 
     public void setProducer(String producer) {
         this.producer = producer;
+    }
+
+    public String getPictureURL() {
+        return pictureURL;
+    }
+
+    public void setPictureURL(String pictureURL) {
+        this.pictureURL = pictureURL;
     }
 }

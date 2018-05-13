@@ -60,28 +60,32 @@
         <tr>
             <td>Karta graficzna</td>
             <td><span th:if="${isGraphicCard}" th:text="${graphicCardName}"></span>
-                <span th:if="${!isGraphicCard}"><a th:text="Dodaj" class="btn btn-success" th:href="@{/search}"></a></span></td>
+                <span th:if="${!isGraphicCard}"><a th:text="Dodaj" class="btn btn-success" th:href="@{/search?componentType=GraphicCard}"></a></span></td>
             <td><span th:if="${isGraphicCard}" th:text="${graphicCardPrice}"></span></td>
         </tr>
         <tr>
             <td>Procesor</td>
             <td><span th:if="${isProcessor}" th:text="${processorsName}"></span>
-                <span th:if="${!isProcessor}"><a th:text="Dodaj" class="btn btn-success" th:href="@{/search}"></a></span></td>
-            <td><span th:if="${isProcessor}" th:text="${graphicCardPrice}"></span></td>
+                <span th:if="${!isProcessor}"><a th:text="Dodaj" class="btn btn-success" th:href="@{/search?componentType=Processor}"></a></span></td>
+            <td><span th:if="${isProcessor}" th:text="${processorPrice}"></span></td>
         </tr>
         <tr>
             <td>Zasilacz</td>
             <td><span th:if="${isPowerSupply}" th:text="${powerSupplyName}"></span>
-                <span th:if="${!isPowerSupply}"><a th:text="Dodaj" class="btn btn-success" th:href="@{/search}"></a></span></td>
+                <span th:if="${!isPowerSupply}"><a th:text="Dodaj" class="btn btn-success" th:href="@{/search?componentType=PowerSupply}"></a></span></td>
             <td><span th:if="${isPowerSupply}" th:text="${powerSupplyPrice}"></span></td>
         </tr>
         <tr>
             <td>Suma:</td>
             <td></td>
-            <td>2000</td>
+            <td th:text="${total}"></td>
         </tr>
         </tbody>
     </table>
+
+    <span><a th:text="EURO" class="btn btn-success" th:href="@{/pcconfig?currency=euro}"></a></span>
+    <span><a th:text="PLN" class="btn btn-success" th:href="@{/pcconfig}"></a></span>
+    <span><a th:text="USD" class="btn btn-success" th:href="@{/pcconfig?currency=usd}"></a></span>
 
 </div>
 

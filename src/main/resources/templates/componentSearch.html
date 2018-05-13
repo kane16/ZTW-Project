@@ -72,9 +72,10 @@
     <div th:if="${tableActive}">
         <table class="table" align="center" style="background-color: white;border-radius: 10px;">
             <tr scope="row" th:each="product : ${productList}">
-                <td style="width: 300px; text-align: center;"><img style="width: 198px; height: 160px" th:src="${product.getPictureUrl()}"/></td>
+                <td style="width: 300px; text-align: center;"><img style="width: 198px; height: 160px" th:src="${product.getPictureURL()}"/></td>
                 <td style="width: 300px; text-align: center;" th:text="${product.getName()}"></td>
                 <td style="width: 300px; text-align: center;" th:text="${product.getPrice()}"></td>
+                <td><span><a th:text="Dodaj" class="btn btn-success" th:href="@{'/search/add?componentType='+${product.getComponentType()}+'&id='+${product.getId()}}"></a></span></td>
             </tr>
         </table>
     </div>

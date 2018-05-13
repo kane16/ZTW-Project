@@ -33,7 +33,7 @@ public class User implements Serializable {
     @Column
     private String confirmationToken;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "roleId")
     private UserRole userRole;
 

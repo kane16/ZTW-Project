@@ -20,7 +20,7 @@ public class UserRole implements Serializable {
     @Column
     private String description;
 
-    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "userRole")
+    @OneToMany(cascade = CascadeType.MERGE, mappedBy = "userRole")
     private Set<User> users = new HashSet<>();
 
     public long getRoleId() {
