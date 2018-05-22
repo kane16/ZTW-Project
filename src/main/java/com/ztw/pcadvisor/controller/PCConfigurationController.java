@@ -43,7 +43,7 @@ public class PCConfigurationController {
             model.addAttribute("isGraphicCard", true);
             model.addAttribute("graphicCardName", graphicCard.getName());
             if(currency == null){
-                model.addAttribute("graphicCardPrice", graphicCard.getPrice()+" zł");
+                model.addAttribute("graphicCardPrice", String.format("%.2f",graphicCard.getPrice())+" zł");
             }else if(currency.equals("euro")){
                 euroBaseConversion = fetchConverted();
                 model.addAttribute("graphicCardPrice", String.format("%.2f",graphicCard.getPrice()/euroBaseConversion.getRates().getPln())+" €");
@@ -57,7 +57,7 @@ public class PCConfigurationController {
             model.addAttribute("isProcessor", true);
             model.addAttribute("processorsName", processor.getName());
             if(currency == null){
-                model.addAttribute("processorPrice", processor.getPrice()+" zł");
+                model.addAttribute("processorPrice", String.format("%.2f",processor.getPrice())+" zł");
             }else if(currency.equals("euro")){
                 euroBaseConversion = fetchConverted();
                 model.addAttribute("processorPrice", String.format("%.2f",processor.getPrice()/euroBaseConversion.getRates().getPln())+" €");
@@ -71,7 +71,7 @@ public class PCConfigurationController {
             model.addAttribute("isPowerSupply", true);
             model.addAttribute("powerSupplyName", powerSupply.getName());
             if(currency == null){
-                model.addAttribute("powerSupplyPrice", powerSupply.getPrice()+" zł");
+                model.addAttribute("powerSupplyPrice", String.format("%.2f",powerSupply.getPrice())+" zł");
             }else if(currency.equals("euro")){
                 euroBaseConversion = fetchConverted();
                 model.addAttribute("powerSupplyPrice", String.format("%.2f",powerSupply.getPrice()/euroBaseConversion.getRates().getPln())+" €");
@@ -82,7 +82,7 @@ public class PCConfigurationController {
             total += powerSupply.getPrice();
         }else model.addAttribute("isPowerSupply", false);
         if(currency == null){
-            model.addAttribute("total", total+" zł");
+            model.addAttribute("total", String.format("%.2f",total)+" zł");
         }else if(currency.equals("euro")){
             euroBaseConversion = fetchConverted();
             model.addAttribute("total", String.format("%.2f",total/euroBaseConversion.getRates().getPln())+" €");
