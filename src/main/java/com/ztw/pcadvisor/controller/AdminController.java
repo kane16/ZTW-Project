@@ -77,14 +77,18 @@ public class AdminController {
             String url = sc.next();
             double price = Double.parseDouble(sc.next());
             String producer = sc.next();
+            ComponentType type = ComponentType.valueOf(sc.next());
+            double rating = sc.nextDouble();
             boolean isPartName = name.contains(partName);
-            if(isPartName){
+            boolean isCorrectComponentType = type.equals(ComponentType.valueOf(componentType));
+            if(isPartName && isCorrectComponentType){
                 if(componentType.equals(ComponentType.GraphicCard.toString())){
                     GraphicCard gc = new GraphicCard();
                     gc.setName(name);
                     gc.setPicture(url);
                     gc.setPrice(price);
                     gc.setCardProducer(producer);
+                    gc.setRating(rating);
                     gcRepository.save(gc);
                 }else if(componentName.equals(ComponentType.Processor.toString())){
                     Processor processor = new Processor();
@@ -92,6 +96,7 @@ public class AdminController {
                     processor.setPictureURL(url);
                     processor.setPrice(price);
                     processor.setProducer(producer);
+                    processor.setRating(rating);
                     processorRepository.save(processor);
                 }else if(componentName.equals(ComponentType.PowerSupply.toString())){
                     PowerSupply powerSupply = new PowerSupply();
@@ -99,6 +104,7 @@ public class AdminController {
                     powerSupply.setPicture(url);
                     powerSupply.setPrice(price);
                     powerSupply.setProducer(producer);
+                    powerSupply.setRating(rating);
                     powerSupplyRepository.save(powerSupply);
                 }
             }

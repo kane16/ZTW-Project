@@ -54,6 +54,7 @@
             <th>Typ komponentu</th>
             <th>Nazwa komponentu</th>
             <th>Cena</th>
+            <th>Ocena</th>
         </tr>
         </thead>
         <tbody>
@@ -62,23 +63,27 @@
             <td><span th:if="${isGraphicCard}" th:text="${graphicCardName}"></span>
                 <span th:if="${!isGraphicCard}"><a th:text="Dodaj" class="btn btn-success" th:href="@{/search?componentType=GraphicCard}"></a></span></td>
             <td><span th:if="${isGraphicCard}" th:text="${graphicCardPrice}"></span></td>
+            <td><span th:if="${isGraphicCard}" th:text="${gcRating}"></span></td>
         </tr>
         <tr>
             <td>Procesor</td>
             <td><span th:if="${isProcessor}" th:text="${processorsName}"></span>
                 <span th:if="${!isProcessor}"><a th:text="Dodaj" class="btn btn-success" th:href="@{/search?componentType=Processor}"></a></span></td>
             <td><span th:if="${isProcessor}" th:text="${processorPrice}"></span></td>
+            <td><span th:if="${isProcessor}" th:text="${processorRating}"></span></td>
         </tr>
         <tr>
             <td>Zasilacz</td>
             <td><span th:if="${isPowerSupply}" th:text="${powerSupplyName}"></span>
                 <span th:if="${!isPowerSupply}"><a th:text="Dodaj" class="btn btn-success" th:href="@{/search?componentType=PowerSupply}"></a></span></td>
             <td><span th:if="${isPowerSupply}" th:text="${powerSupplyPrice}"></span></td>
+            <td><span th:if="${isPowerSupply}" th:text="${powerSupplyRating}"></span></td>
         </tr>
         <tr>
             <td>Suma:</td>
             <td></td>
             <td th:text="${total}"></td>
+            <td th:if="${isAllComponents}" th:text="${allRating}"></td>
         </tr>
         </tbody>
     </table>

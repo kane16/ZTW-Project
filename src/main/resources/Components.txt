@@ -1,3 +1,3 @@
-GeForce GTX1080;https://images.morele.net/full/955697_0_f.png;2539.00;Gigabyte;
-Intel Core i5-8400; https://images.morele.net/full/978216_1_f.jpg;749.00;Intel;
-Chieftec 700W; https://images.morele.net/full/597434_0_f.jpg;149.00;Chieftec;
+GeForce GTX1080;https://images.morele.net/full/955697_0_f.png;2539.00;Gigabyte;GraphicCard;8.0;
+Intel Core i5-8400; https://images.morele.net/full/978216_1_f.jpg;749.00;Intel;Processor;8.0;
+Chieftec 700W; https://images.morele.net/full/597434_0_f.jpg;149.00;Chieftec;PowerSupply;6.0;

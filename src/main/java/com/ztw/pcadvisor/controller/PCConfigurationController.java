@@ -26,12 +26,13 @@ public class PCConfigurationController {
     @GetMapping("/pcconfig")
     public String getPCConfigurationSite(Model model, Principal principal,
                                          @RequestParam(value = "currency", required = false) String currency) throws IOException {
-        User user = userRepository.findByUserName(principal.getName());
+        User user = userRepository.findByUserName(principal.getName()).get(0);
         PCConfiguration pcConfiguration = user.getPcConfiguration();
         GraphicCard graphicCard = null;
         Processor processor = null;
         PowerSupply powerSupply = null;
         double total = 0;
+        double ratingsSum = 0;
         EuroBaseConversion euroBaseConversion = null;
         if(pcConfiguration!=null){
             graphicCard = pcConfiguration.getGraphicCard();
@@ -52,6 +53,17 @@ public class PCConfigurationController {
                 model.addAttribute("graphicCardPrice", String.format("%.2f",graphicCard.getPrice()/euroBaseConversion.getRates().getPln()*euroBaseConversion.getRates().getUsd())+" $");
             }
             total += graphicCard.getPrice();
+            if(user.getUserType().equals(UserType.Standardowy)){
+                model.addAttribute("gcRating", String.format("%.1f", graphicCard.getRating()));
+                ratingsSum += graphicCard.getRating();
+            }else if(user.getUserType().equals(UserType.Gracz)){
+                model.addAttribute("gcRating", String.format("%.1f", graphicCard.getRating()));
+                ratingsSum += graphicCard.getRating()*4;
+            }else{
+                model.addAttribute("gcRating", String.format("%.1f", graphicCard.getRating()));
+                ratingsSum += graphicCard.getRating()*3;
+            }
+
         }else model.addAttribute("isGraphicCard", false);
         if(processor!=null) {
             model.addAttribute("isProcessor", true);
@@ -66,6 +78,16 @@ public class PCConfigurationController {
                 model.addAttribute("processorPrice", String.format("%.2f",processor.getPrice()/euroBaseConversion.getRates().getPln()*euroBaseConversion.getRates().getUsd())+" $");
             }
             total += processor.getPrice();
+            if(user.getUserType().equals(UserType.Standardowy)){
+                ratingsSum += processor.getRating();
+                model.addAttribute("processorRating", String.format("%.1f", processor.getRating()));
+            }else if(user.getUserType().equals(UserType.Gracz)){
+                ratingsSum += processor.getRating()*2;
+                model.addAttribute("processorRating", String.format("%.1f", processor.getRating()));
+            }else{
+                model.addAttribute("processorRating", String.format("%.1f", processor.getRating()));
+                ratingsSum += processor.getRating()*3;
+            }
         }else model.addAttribute("isProcessor", false);
         if(powerSupply != null){
             model.addAttribute("isPowerSupply", true);
@@ -80,6 +102,8 @@ public class PCConfigurationController {
                 model.addAttribute("powerSupplyPrice", String.format("%.2f",powerSupply.getPrice()/euroBaseConversion.getRates().getPln()*euroBaseConversion.getRates().getUsd())+" $");
             }
             total += powerSupply.getPrice();
+            model.addAttribute("powerSupplyRating", String.format("%.1f", powerSupply.getRating()));
+            ratingsSum += powerSupply.getRating();
         }else model.addAttribute("isPowerSupply", false);
         if(currency == null){
             model.addAttribute("total", String.format("%.2f",total)+" zł");
@@ -89,6 +113,16 @@ public class PCConfigurationController {
         }else if(currency.equals("usd")){
             euroBaseConversion = fetchConverted();
             model.addAttribute("total", String.format("%.2f",total/euroBaseConversion.getRates().getPln()*euroBaseConversion.getRates().getUsd())+" $");
+        }
+        if(graphicCard != null && processor != null && powerSupply != null){
+            model.addAttribute("isAllComponents", true);
+            if(user.getUserType().equals(UserType.Standardowy)){
+                model.addAttribute("allRating", String.format("%.1f", ratingsSum/3));
+            }else if(user.getUserType().equals(UserType.Gracz)){
+                model.addAttribute("allRating", String.format("%.1f", ratingsSum/7));
+            }else{
+                model.addAttribute("allRating", String.format("%.1f", ratingsSum/7));
+            }
         }
         return "pcConfigurationSite";
     }

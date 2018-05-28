@@ -15,7 +15,7 @@ public class UsersCache {
     @Cacheable(value = "userCache", key = "#username")
     public User getUser(String username){
         System.out.println("Caching user now!!!");
-        return repository.findByUserName(username);
+        return repository.findByUserName(username).get(0);
     }
 
 }

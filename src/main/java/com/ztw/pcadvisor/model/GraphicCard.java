@@ -47,6 +47,9 @@ public class GraphicCard {
     @Column
     private String picture;
 
+    @Column
+    private double rating;
+
     @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "graphicCard")
     private Set<PCConfiguration> configurations = new HashSet<>();
 
@@ -162,4 +165,11 @@ public class GraphicCard {
         this.price = price;
     }
 
+    public double getRating() {
+        return rating;
+    }
+
+    public void setRating(double rating) {
+        this.rating = rating;
+    }
 }

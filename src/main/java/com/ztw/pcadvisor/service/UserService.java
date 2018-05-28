@@ -58,7 +58,7 @@ public class UserService implements UserDetailsService {
 
     public boolean createUser(User user){
 
-        User newUser = userRepository.findByUserName(user.getUserName());
+        User newUser = userRepository.findByUserName(user.getUserName()).get(0);
 
         if(newUser == null){
             user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
@@ -84,7 +84,7 @@ public class UserService implements UserDetailsService {
 
     public boolean updateUser(User user){
 
-        User updatedUser = userRepository.findByUserName(user.getUserName());
+        User updatedUser = userRepository.findByUserName(user.getUserName()).get(0);
 
         if(updatedUser != null){
             user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
@@ -97,14 +97,14 @@ public class UserService implements UserDetailsService {
 
 
     public void deleteUser(String username){
-        User user = userRepository.findByUserName(username);
+        User user = userRepository.findByUserName(username).get(0);
         if(user != null && !user.getUserRole().getName().equals("ROLE_ADMIN")){
             userRepository.delete(user);
         }
     }
 
     public User findByUserName(String userName){
-        return userRepository.findByUserName(userName);
+        return userRepository.findByUserName(userName).get(0);
     }
 
     @Override
@@ -113,4 +113,9 @@ public class UserService implements UserDetailsService {
         String userRole = user.getUserRole().getName();
         return new CustomUserDetails(user, userRole);
     }
+
+    public List<User> findAllStandardUsers(){
+        return userRepository.findByUserRole(roleRepository.findByName("ROLE_USER"));
+    }
+
 }

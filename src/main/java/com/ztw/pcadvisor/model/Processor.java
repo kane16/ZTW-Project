@@ -40,6 +40,9 @@ public class Processor {
     @Column
     private String pictureURL;
 
+    @Column
+    private double rating;
+
     @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "processor")
     private Set<PCConfiguration> configurations = new HashSet<>();
 
@@ -153,5 +156,13 @@ public class Processor {
 
     public void setPictureURL(String pictureURL) {
         this.pictureURL = pictureURL;
+    }
+
+    public double getRating() {
+        return rating;
+    }
+
+    public void setRating(double rating) {
+        this.rating = rating;
     }
 }

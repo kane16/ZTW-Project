@@ -29,6 +29,9 @@ public class PowerSupply {
     @Column
     private String picture;
 
+    @Column
+    private double rating;
+
     @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "pcCase")
     private Set<PCConfiguration> configurations = new HashSet<>();
 
@@ -94,5 +97,13 @@ public class PowerSupply {
 
     public void setPicture(String picture) {
         this.picture = picture;
+    }
+
+    public double getRating() {
+        return rating;
+    }
+
+    public void setRating(double rating) {
+        this.rating = rating;
     }
 }
