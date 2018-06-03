@@ -26,7 +26,7 @@ public class PCConfigurationController {
     @GetMapping("/pcconfig")
     public String getPCConfigurationSite(Model model, Principal principal,
                                          @RequestParam(value = "currency", required = false) String currency) throws IOException {
-        User user = userRepository.findByUserName(principal.getName()).get(0);
+        User user = userRepository.findByUserName(principal.getName());
         PCConfiguration pcConfiguration = user.getPcConfiguration();
         GraphicCard graphicCard = null;
         Processor processor = null;

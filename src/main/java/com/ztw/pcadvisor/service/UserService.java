@@ -58,7 +58,7 @@ public class UserService implements UserDetailsService {
 
     public boolean createUser(User user){
 
-        User newUser = userRepository.findByUserName(user.getUserName()).get(0);
+        User newUser = userRepository.findByUserName(user.getUserName());
 
         if(newUser == null){
             user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
@@ -84,7 +84,7 @@ public class UserService implements UserDetailsService {
 
     public boolean updateUser(User user){
 
-        User updatedUser = userRepository.findByUserName(user.getUserName()).get(0);
+        User updatedUser = userRepository.findByUserName(user.getUserName());
 
         if(updatedUser != null){
             user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
@@ -97,14 +97,14 @@ public class UserService implements UserDetailsService {
 
 
     public void deleteUser(String username){
-        User user = userRepository.findByUserName(username).get(0);
+        User user = userRepository.findByUserName(username);
         if(user != null && !user.getUserRole().getName().equals("ROLE_ADMIN")){
             userRepository.delete(user);
         }
     }
 
     public User findByUserName(String userName){
-        return userRepository.findByUserName(userName).get(0);
+        return userRepository.findByUserName(userName);
     }
 
     @Override

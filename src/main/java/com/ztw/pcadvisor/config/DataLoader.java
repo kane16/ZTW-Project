@@ -11,25 +11,46 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
+/**
+ * The Data loader.
+ */
 @Component
 @ComponentScan
 public class DataLoader implements ApplicationRunner {
 
+    /**
+     * The User repository.
+     */
     @Autowired
     UserRepository userRepository;
 
+    /**
+     * The User service.
+     */
     @Autowired
     UserService userService;
 
+    /**
+     * The Role repository.
+     */
     @Autowired
     RoleRepository roleRepository;
 
+    /**
+     * The Graphic Card repository.
+     */
     @Autowired
     GCRepository gcRepository;
 
+    /**
+     * The Processor repository.
+     */
     @Autowired
     ProcessorRepository processorRepository;
 
+    /**
+     * The Power supply repository.
+     */
     @Autowired
     PowerSupplyRepository powerSupplyRepository;
 
@@ -55,7 +76,7 @@ public class DataLoader implements ApplicationRunner {
         User secondUser = new User();
         secondUser.setUserType(UserType.Gracz);
         secondUser.setUserName("adam2222");
-        secondUser.setPassword(userService.encryptPassword("Guimis111!"));
+        secondUser.setPassword(userService.encryptPassword("kane"));
         secondUser.setUserRole(userRoleUser);
         userRepository.save(user);
         userRepository.save(secondUser);

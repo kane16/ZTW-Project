@@ -88,7 +88,7 @@ public class PcadvisorApplicationTests {
     @Test
     public void checkByUsername(){
 	    Mockito.when(userRepository.findByUserName("kane16")).thenReturn
-                (users.stream().filter(user -> user.getUserName().equals("kane16")).collect(Collectors.toList()));
+                (users.stream().filter(user -> user.getUserName().equals("kane16")).collect(Collectors.toList()).get(0));
 	    Assert.assertEquals(user1, userService.findByUserName("kane16"));
 	}
 
@@ -112,9 +112,9 @@ public class PcadvisorApplicationTests {
     public void deleteUser(){
 	    String username = "Magda12";
         Mockito.when(userRepository.findByUserName(username)).thenReturn
-                (users.stream().filter(user -> user.getUserName().equals(username)).collect(Collectors.toList()));
+                (users.stream().filter(user -> user.getUserName().equals(username)).collect(Collectors.toList()).get(0));
 
-        User user = userRepository.findByUserName(username).get(0);
+        User user = userRepository.findByUserName(username);
 
         Mockito.doAnswer((invocation) -> {
             User userArgument = (User)invocation.getArgument(0);
