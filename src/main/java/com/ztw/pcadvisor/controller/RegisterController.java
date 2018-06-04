@@ -13,18 +13,41 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
 
+/**
+ * The Register controller.
+ */
 @Controller
 public class RegisterController {
 
+    /**
+     * The User service.
+     */
     @Autowired
     UserService userService;
 
+    /**
+     * Register string.
+     *
+     * @return the string
+     */
     @GetMapping("/register")
     public String register() {
         return "registerSite";
     }
 
 
+    /**
+     * Gest register submit site.
+     *
+     * @param firstName      the first name
+     * @param lastName       the last name
+     * @param userName       the user name
+     * @param password       the password
+     * @param repeatPassword the repeat password
+     * @param userType       the user type
+     * @param model          the model
+     * @return the string
+     */
     @PostMapping("/register")
     public String registerSubmit(
             @ModelAttribute("firstName") String firstName,

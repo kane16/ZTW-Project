@@ -11,14 +11,26 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.*;
 
+/**
+ * The API controller.
+ */
 @RestController
 @RequestMapping("/api")
 public class APIController {
 
 
+    /**
+     * The Product service.
+     */
     @Autowired
     ProductService productService;
 
+    /**
+     * Finds all components.
+     *
+     * @param componentType the component type
+     * @return the list
+     */
     @GetMapping(value = "/all")
     public List<Map<String, String>> findAll(@RequestParam(value = "componentType", required = false) String componentType){
         List<PCComponent> allItems = productService.getProducersAndPCComponents();

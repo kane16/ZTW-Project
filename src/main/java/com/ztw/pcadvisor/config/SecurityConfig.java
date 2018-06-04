@@ -16,10 +16,18 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import javax.sql.DataSource;
 
 
+/**
+ * The Security config.
+ */
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
+    /**
+     * Get user service.
+     *
+     * @return the user service
+     */
     @Bean
     public UserService getUserService(){
         return new UserService();
@@ -45,6 +53,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             "/api/currency"
     };
 
+    /**
+     * Config authentication.
+     *
+     * @param auth the auth
+     * @throws Exception the exception
+     */
     @Autowired
     public void configAuthentication(AuthenticationManagerBuilder auth) throws Exception{
         auth.userDetailsService(userService).passwordEncoder(encoder);
@@ -69,6 +83,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/admin/**").hasRole("ADMIN");
     }
 
+    /**
+     * Gets Persistent token repository.
+     *
+     * @return the persistent token repository
+     */
     @Bean
     public PersistentTokenRepository persistentTokenRepository(){
         final JdbcTokenRepositoryImpl jdbcTokenRepository = new JdbcTokenRepositoryImpl();

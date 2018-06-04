@@ -11,6 +11,9 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * The Admin service.
+ */
 @Service
 public class AdminService {
 
@@ -23,6 +26,11 @@ public class AdminService {
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
+    /**
+     * Create admin.
+     *
+     * @return the boolean
+     */
     public boolean createAdmin(){
         User user = new User();
         user.setFirstName("Łukasz");
@@ -39,6 +47,11 @@ public class AdminService {
         return true;
     }
 
+    /**
+     * Find all admins.
+     *
+     * @return the list
+     */
     public List<User> findAllAdmins(){
         return userRepository.findByUserRole(roleRepository.findByName("ROLE_ADMIN"));
     }

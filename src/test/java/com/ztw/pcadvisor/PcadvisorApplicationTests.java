@@ -29,21 +29,36 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.stream.Collectors;
 
+/**
+ * The UnitTests.
+ */
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class PcadvisorApplicationTests {
 
-	@MockBean
+    /**
+     * The User repository.
+     */
+    @MockBean
     UserRepository userRepository;
 
-	@MockBean
+    /**
+     * The Role repository.
+     */
+    @MockBean
     RoleRepository roleRepository;
 
     private ArrayList<User> users;
 
+    /**
+     * The User service.
+     */
     @Autowired
     UserService userService;
 
+    /**
+     * The Admin service.
+     */
     @Autowired
     AdminService adminService;
 
@@ -53,7 +68,10 @@ public class PcadvisorApplicationTests {
 
     private ArrayList<User> standardUsers;
 
-	@Before
+    /**
+     * Set up.
+     */
+    @Before
     public void setUp(){
         user1 = new User();
         user1.setUserName("kane16");
@@ -79,12 +97,18 @@ public class PcadvisorApplicationTests {
     }
 
 
-	@Test
+    /**
+     * Check all users.
+     */
+    @Test
 	public void checkAllUsers(){
         Mockito.when(userRepository.findAll()).thenReturn(users);
         Assert.assertEquals(2,userService.getAllUsers().size());
     }
 
+    /**
+     * Check by username.
+     */
     @Test
     public void checkByUsername(){
 	    Mockito.when(userRepository.findByUserName("kane16")).thenReturn
@@ -92,7 +116,10 @@ public class PcadvisorApplicationTests {
 	    Assert.assertEquals(user1, userService.findByUserName("kane16"));
 	}
 
-	@Test
+    /**
+     * Find all admin users.
+     */
+    @Test
     public void findAllAdminUsers(){
 	    Mockito.when(userRepository.findByUserRole(roleRepository.findByName("ROLE_ADMIN"))).thenReturn(
                 users.stream().filter(user -> user.getUserRole().getName().equals("ROLE_ADMIN")).collect(Collectors.toList())
@@ -100,6 +127,9 @@ public class PcadvisorApplicationTests {
 	    Assert.assertEquals(adminUsers, adminService.findAllAdmins());
     }
 
+    /**
+     * Find all standard users.
+     */
     @Test
     public void findAllStandardUsers(){
 	    Mockito.when(userRepository.findByUserRole(roleRepository.findByName("ROLE_USER"))).thenReturn(
@@ -108,6 +138,9 @@ public class PcadvisorApplicationTests {
 	    Assert.assertEquals(standardUsers, userService.findAllStandardUsers());
     }
 
+    /**
+     * Delete user.
+     */
     @Test
     public void deleteUser(){
 	    String username = "Magda12";

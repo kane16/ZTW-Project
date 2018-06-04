@@ -16,30 +16,61 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Scanner;
 
+/**
+ * The type Admin controller.
+ */
 @Controller
 public class AdminController {
 
+    /**
+     * The User service.
+     */
     @Autowired
     UserService userService;
 
+    /**
+     * The Resource loader.
+     */
     @Autowired
     ResourceLoader resourceLoader;
 
+    /**
+     * The Graphic Card repository.
+     */
     @Autowired
     GCRepository gcRepository;
 
+    /**
+     * The Processor repository.
+     */
     @Autowired
     ProcessorRepository processorRepository;
 
+    /**
+     * The Power supply repository.
+     */
     @Autowired
     PowerSupplyRepository powerSupplyRepository;
 
 
+    /**
+     * Admin string.
+     *
+     * @return the string
+     */
     @RequestMapping("/admin")
     public String admin(){
         return "adminSite";
     }
 
+    /**
+     * Admin change password string.
+     *
+     * @param username             the username
+     * @param password             the password
+     * @param passwordConfirmation the password confirmation
+     * @return the string
+     */
     @PostMapping("/admin/changePassword")
     public String adminChangePassword(
             @ModelAttribute("usernameToChange") String username,
@@ -54,6 +85,12 @@ public class AdminController {
         return "adminSite";
     }
 
+    /**
+     * Admin delete user string.
+     *
+     * @param usernameToDelete the username to delete
+     * @return the string
+     */
     @PostMapping("/admin/deleteUser")
     public String adminDeleteUser(
             @ModelAttribute("usernameToDelete") String usernameToDelete
@@ -62,6 +99,15 @@ public class AdminController {
         return "adminSite";
     }
 
+    /**
+     * Adding part in admin panel.
+     *
+     * @param partName      the part name
+     * @param componentType the component type
+     * @param componentName the component name
+     * @return the string
+     * @throws IOException the io exception
+     */
     @PostMapping("/admin/addPart")
     public String adminAddPart(
             @ModelAttribute("partName") String partName,

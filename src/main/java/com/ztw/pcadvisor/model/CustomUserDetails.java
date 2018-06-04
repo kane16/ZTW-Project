@@ -6,11 +6,20 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 
+/**
+ * The Custom user details.
+ */
 public class CustomUserDetails implements UserDetails {
 
     private User user;
     private String userRole;
 
+    /**
+     * Instantiates a new CustomUserDetails.
+     *
+     * @param user     the user
+     * @param userRole the user role
+     */
     public CustomUserDetails(User user, String userRole){
         this.user = user;
         this.userRole = userRole;

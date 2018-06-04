@@ -14,15 +14,33 @@ import java.io.IOException;
 import java.net.URL;
 import java.security.Principal;
 
+/**
+ * The PC configuration controller.
+ */
 @Controller
 public class PCConfigurationController {
 
+    /**
+     * The User repository.
+     */
     @Autowired
     UserRepository userRepository;
 
+    /**
+     * The Configuration repository.
+     */
     @Autowired
     ConfigurationRepository configurationRepository;
 
+    /**
+     * Gets PCConfiguration site.
+     *
+     * @param model     the model
+     * @param principal the principal
+     * @param currency  the currency
+     * @return the pc configuration site
+     * @throws IOException the io exception
+     */
     @GetMapping("/pcconfig")
     public String getPCConfigurationSite(Model model, Principal principal,
                                          @RequestParam(value = "currency", required = false) String currency) throws IOException {

@@ -14,9 +14,18 @@ import java.net.URL;
 import java.util.Iterator;
 import java.util.Map;
 
+/**
+ * The Conversion controller.
+ */
 @RestController
 public class ConversionController {
 
+    /**
+     * Gets currency.
+     *
+     * @return the currency
+     * @throws IOException the io exception
+     */
     @RequestMapping("/api/currency")
     public String getCurrency() throws IOException {
         return fetchConverted().getRates().getPln()+" zł";

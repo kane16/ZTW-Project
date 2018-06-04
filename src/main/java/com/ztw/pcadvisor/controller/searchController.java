@@ -16,28 +16,57 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.security.Principal;
 import java.util.List;
 
+/**
+ * The Search controller.
+ */
 @Controller
 public class searchController {
 
+    /**
+     * The Product service.
+     */
     @Autowired
     ProductService productService;
 
+    /**
+     * The Gc repository.
+     */
     @Autowired
     GCRepository gcRepository;
 
+    /**
+     * The User service.
+     */
     @Autowired
     UserService userService;
 
+    /**
+     * The Configuration repository.
+     */
     @Autowired
     ConfigurationRepository configurationRepository;
 
+    /**
+     * The Processor repository.
+     */
     @Autowired
     ProcessorRepository processorRepository;
 
+    /**
+     * The Power supply repository.
+     */
     @Autowired
     PowerSupplyRepository powerSupplyRepository;
 
 
+    /**
+     * Gets search component site.
+     *
+     * @param model         the model
+     * @param componentCode the component code
+     * @param componentType the component type
+     * @return the string
+     */
     @GetMapping("/search")
     public String searchComponent(Model model,
                                   @RequestParam(value = "componentCode", required = false) String componentCode,
@@ -48,13 +77,21 @@ public class searchController {
             model.addAttribute("tableActive", true);
         }
         else if(componentType!=null){
-            List<PCComponent> PCComponents = productService.findAllComponentType(ComponentType.valueOf(componentType));
+            List<PCComponent> PCComponents = productService.findAllComponents(ComponentType.valueOf(componentType));
             model.addAttribute("productList", PCComponents);
             model.addAttribute("tableActive", true);
         }
         return "componentSearch";
     }
 
+    /**
+     * Add component to set string.
+     *
+     * @param componentType the component type
+     * @param id            the id
+     * @param principal     the principal
+     * @return the string
+     */
     @GetMapping("/search/add")
     public String addComponenentToSet(@RequestParam(value = "componentType") String componentType,
                                       @RequestParam(value = "id") int id,

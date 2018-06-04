@@ -4,6 +4,9 @@ import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * The type HDD.
+ */
 @Entity
 public class HDD {
 
@@ -38,82 +41,182 @@ public class HDD {
     @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "hdd")
     private Set<PCConfiguration> configurations = new HashSet<>();
 
+    /**
+     * Gets configurations.
+     *
+     * @return the configurations
+     */
     public Set<PCConfiguration> getConfigurations() {
         return configurations;
     }
 
+    /**
+     * Sets configurations.
+     *
+     * @param configurations the configurations
+     */
     public void setConfigurations(Set<PCConfiguration> configurations) {
         this.configurations = configurations;
     }
 
+    /**
+     * Gets hdd id.
+     *
+     * @return the hdd id
+     */
     public int getHddID() {
         return hddID;
     }
 
+    /**
+     * Sets hdd id.
+     *
+     * @param hddID the hdd id
+     */
     public void setHddID(int hddID) {
         this.hddID = hddID;
     }
 
+    /**
+     * Gets capacity.
+     *
+     * @return the capacity
+     */
     public int getCapacity() {
         return capacity;
     }
 
+    /**
+     * Sets capacity.
+     *
+     * @param capacity the capacity
+     */
     public void setCapacity(int capacity) {
         this.capacity = capacity;
     }
 
+    /**
+     * Gets write speed.
+     *
+     * @return the write speed
+     */
     public int getWriteSpeed() {
         return writeSpeed;
     }
 
+    /**
+     * Sets write speed.
+     *
+     * @param writeSpeed the write speed
+     */
     public void setWriteSpeed(int writeSpeed) {
         this.writeSpeed = writeSpeed;
     }
 
+    /**
+     * Gets read speed.
+     *
+     * @return the read speed
+     */
     public int getReadSpeed() {
         return readSpeed;
     }
 
+    /**
+     * Sets read speed.
+     *
+     * @param readSpeed the read speed
+     */
     public void setReadSpeed(int readSpeed) {
         this.readSpeed = readSpeed;
     }
 
+    /**
+     * Gets rpm.
+     *
+     * @return the rpm
+     */
     public int getRPM() {
         return RPM;
     }
 
+    /**
+     * Sets rpm.
+     *
+     * @param RPM the rpm
+     */
     public void setRPM(int RPM) {
         this.RPM = RPM;
     }
 
+    /**
+     * Gets price.
+     *
+     * @return the price
+     */
     public double getPrice() {
         return price;
     }
 
+    /**
+     * Sets price.
+     *
+     * @param price the price
+     */
     public void setPrice(double price) {
         this.price = price;
     }
 
+    /**
+     * Gets rank.
+     *
+     * @return the rank
+     */
     public double getRank() {
         return rank;
     }
 
+    /**
+     * Sets rank.
+     *
+     * @param rank the rank
+     */
     public void setRank(double rank) {
         this.rank = rank;
     }
 
+    /**
+     * Gets tdp.
+     *
+     * @return the tdp
+     */
     public int getTDP() {
         return TDP;
     }
 
+    /**
+     * Sets tdp.
+     *
+     * @param TDP the tdp
+     */
     public void setTDP(int TDP) {
         this.TDP = TDP;
     }
 
+    /**
+     * Gets picture url.
+     *
+     * @return the picture url
+     */
     public String getPictureURL() {
         return pictureURL;
     }
 
+    /**
+     * Sets picture url.
+     *
+     * @param pictureURL the picture url
+     */
     public void setPictureURL(String pictureURL) {
         this.pictureURL = pictureURL;
     }
