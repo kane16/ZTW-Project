@@ -30,7 +30,7 @@ public class Processor {
     private double price;
     @Column
     @NotNull
-    private double rank;
+    private double rankOfProcessor;
     @Column
     private int clockBoostFrequency;
     @Column
@@ -194,21 +194,21 @@ public class Processor {
     }
 
     /**
-     * Gets rank.
+     * Gets rankOfProcessor.
      *
-     * @return the rank
+     * @return the rankOfProcessor
      */
-    public double getRank() {
-        return rank;
+    public double getRankOfProcessor() {
+        return rankOfProcessor;
     }
 
     /**
-     * Sets rank.
+     * Sets rankOfProcessor.
      *
-     * @param rank the rank
+     * @param rankOfProcessor the rankOfProcessor
      */
-    public void setRank(double rank) {
-        this.rank = rank;
+    public void setRankOfProcessor(double rankOfProcessor) {
+        this.rankOfProcessor = rankOfProcessor;
     }
 
     /**

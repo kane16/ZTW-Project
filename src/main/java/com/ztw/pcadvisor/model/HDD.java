@@ -30,7 +30,7 @@ public class HDD {
     private double price;
 
     @Column
-    private double rank;
+    private double rankOfHDD;
 
     @Column
     private int TDP;
@@ -168,21 +168,21 @@ public class HDD {
     }
 
     /**
-     * Gets rank.
+     * Gets rankOfHDD.
      *
-     * @return the rank
+     * @return the rankOfHDD
      */
-    public double getRank() {
-        return rank;
+    public double getRankOfHDD() {
+        return rankOfHDD;
     }
 
     /**
-     * Sets rank.
+     * Sets rankOfHDD.
      *
-     * @param rank the rank
+     * @param rankOfHDD the rankOfHDD
      */
-    public void setRank(double rank) {
-        this.rank = rank;
+    public void setRankOfHDD(double rankOfHDD) {
+        this.rankOfHDD = rankOfHDD;
     }
 
     /**

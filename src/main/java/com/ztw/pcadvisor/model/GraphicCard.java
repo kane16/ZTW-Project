@@ -30,7 +30,7 @@ public class GraphicCard {
     private int clockFrequency;
 
     @Column
-    private double rank;
+    private double rankOfGC;
 
     @Column
     private int clockBoostFrequency;
@@ -129,21 +129,21 @@ public class GraphicCard {
     }
 
     /**
-     * Gets rank.
+     * Gets rankOfGC.
      *
-     * @return the rank
+     * @return the rankOfGC
      */
-    public double getRank() {
-        return rank;
+    public double getRankOfGC() {
+        return rankOfGC;
     }
 
     /**
-     * Sets rank.
+     * Sets rankOfGC.
      *
-     * @param rank the rank
+     * @param rankOfGC the rankOfGC
      */
-    public void setRank(double rank) {
-        this.rank = rank;
+    public void setRankOfGC(double rankOfGC) {
+        this.rankOfGC = rankOfGC;
     }
 
     /**

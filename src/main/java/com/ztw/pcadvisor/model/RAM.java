@@ -24,7 +24,7 @@ public class RAM {
     private double price;
 
     @Column
-    private double rank;
+    private double rankOfRAM;
 
     @Column
     private String producer;
@@ -126,21 +126,21 @@ public class RAM {
     }
 
     /**
-     * Gets rank.
+     * Gets rankOfRAM.
      *
-     * @return the rank
+     * @return the rankOfRAM
      */
-    public double getRank() {
-        return rank;
+    public double getRankOfRAM() {
+        return rankOfRAM;
     }
 
     /**
-     * Sets rank.
+     * Sets rankOfRAM.
      *
-     * @param rank the rank
+     * @param rankOfRAM the rankOfRAM
      */
-    public void setRank(double rank) {
-        this.rank = rank;
+    public void setRankOfRAM(double rankOfRAM) {
+        this.rankOfRAM = rankOfRAM;
     }
 
     /**

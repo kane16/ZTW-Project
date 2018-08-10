@@ -30,7 +30,7 @@ public class PCCase {
     private double price;
 
     @Column
-    private double rank;
+    private double rankOfCase;
 
     @Column
     private String producer;
@@ -168,21 +168,21 @@ public class PCCase {
     }
 
     /**
-     * Gets rank.
+     * Gets rankOfCase.
      *
-     * @return the rank
+     * @return the rankOfCase
      */
-    public double getRank() {
-        return rank;
+    public double getRankOfCase() {
+        return rankOfCase;
     }
 
     /**
-     * Sets rank.
+     * Sets rankOfCase.
      *
-     * @param rank the rank
+     * @param rankOfCase the rankOfCase
      */
-    public void setRank(double rank) {
-        this.rank = rank;
+    public void setRankOfCase(double rankOfCase) {
+        this.rankOfCase = rankOfCase;
     }
 
     /**

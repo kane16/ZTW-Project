@@ -30,7 +30,7 @@ public class SSD {
     private double price;
 
     @Column
-    private double rank;
+    private double rankOfSSD;
 
     @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "ssd")
     private Set<PCConfiguration> configurations = new HashSet<>();
@@ -162,20 +162,20 @@ public class SSD {
     }
 
     /**
-     * Gets rank.
+     * Gets rankOfSSD.
      *
-     * @return the rank
+     * @return the rankOfSSD
      */
-    public double getRank() {
-        return rank;
+    public double getRankOfSSD() {
+        return rankOfSSD;
     }
 
     /**
-     * Sets rank.
+     * Sets rankOfSSD.
      *
-     * @param rank the rank
+     * @param rankOfSSD the rankOfSSD
      */
-    public void setRank(double rank) {
-        this.rank = rank;
+    public void setRankOfSSD(double rankOfSSD) {
+        this.rankOfSSD = rankOfSSD;
     }
 }
